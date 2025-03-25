@@ -1,6 +1,7 @@
 ---
 layout: default.liquid
 title: Software properties, not paradigms
+tags: [ design ]
 ---
 
 As software developers we have a need to build _good_ software. Due to this
