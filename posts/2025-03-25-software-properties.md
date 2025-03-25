@@ -105,16 +105,19 @@ of the shape they have.
 
 ### Reactivity Boundaries
 
-Components are not alone in a system: they need to react to changes in other components. These are the reactivity boundaries
-between components.
+Components are not alone in a system: they need to react to changes in other components. The surface between
+these two components is the reactivity boundary.
 
 ### Interactivity Boundaries
 
-Components need to command other components to fulfill a business requirement.
+Components need to command other components to fulfill a business requirement. Usually components will
+interact through some kind of interface, either being a function call or a method call. The surface
+of interaction is the interactivity boundaries.
 
 ### Consistency Boundaries
 
-Data in these boundaries need to provide an intentional consistency.
+Data in a component is usually related to data in other components: through deriving new data or by
+owning the data. The relationship of the components through their data is the consistency boundaries.
 
 ### Evolution Boundaries
 
@@ -132,13 +135,18 @@ Given two components:
 <td>No</td><td>Command</td><td>Atomic</td><td>Synchronous</td><td>High Coupling</td>
 </tr>
 <tr>
-<td>Yes</td><td>Command</td><td>Atomic</td><td>Synchronous</td><td>High Coupling - Circular Reference</td>
+<td>Yes</td><td>Command</td><td>Atomic</td><td>Synchronous</td><td>High Coupling</td>
+</tr>
+<td>No</td><td>Command</td><td>Causal</td><td>Synchronous</td><td>Composition</td>
+</tr>
+<tr>
+<td>Yes</td><td>Command</td><td>Causal</td><td>Synchronous</td><td>Reactive Composition</td>
 </tr>
 <tr>
 <td>No</td><td>Command</td><td>Eventual</td><td>Synchronous</td><td>Highly Coupled Services</td>
 </tr>
 <tr>
-<td>Yes</td><td>None</td><td>Eventual</td><td>Asynchronous</td><td>Event Driven</td>
+<td>Yes</td><td>None</td><td>Eventual</td><td>Asynchronous</td><td>Event Driven / Callback</td>
 </tr>
 </tr>
 </table>

@@ -3,7 +3,7 @@ layout: default.liquid
 title: Latest Posts
 pagination:
   include: All
-  per_page: 9
+  per_page: 10
   permalink_suffix: "./{{ num }}/"
   order: Desc
   sort_by: ["published_date"]
@@ -13,7 +13,7 @@ pagination:
 <ul id="index">
 {% for post in paginator.pages %}
  <li>
-	<a data-ctrl="{{forloop.index}}" href="{{ post.permalink }}"><span>^{{forloop.index}}</span> {{post.title}} - {{post.published_date | date: "%Y-%m-%d" }}</a>
+	<a data-ctrl="{{forloop.index0}}" href="{{ post.permalink }}"><span>^{{forloop.index0}}</span> {{post.title}} - {{post.published_date | date: "%Y-%m-%d" }}</a>
 </li>
 {% endfor %}
 </ul>
