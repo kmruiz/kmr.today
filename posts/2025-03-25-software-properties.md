@@ -2,7 +2,6 @@
 layout: default.liquid
 
 title: Software properties, not paradigms
-published_date: 2025-03-25 00:00:00 +0100
 ---
 
 As software developers we have a need to build _good_ software. Due to this
@@ -34,7 +33,7 @@ All paradigms, at least, try to solve _two_ specific questions of software devel
 <th>Paradigm</th><th>State</th><th>Modularisation</th>
 </tr>
 <tr>
-<td>Procedural</td><td>Mutable shared state</td><td>Procedures that handle a slice of the state</td>
+<td>Procedural</td><td>Mutable shared state</td><td>Procedures that mutate a slice of the state</td>
 </tr>
 <tr>
 <td>Object Oriented</td><td>Mutable isolated state</td><td>Messages that trigger changes on a slice of the state</td>
@@ -120,3 +119,26 @@ Data in these boundaries need to provide an intentional consistency.
 ### Evolution Boundaries
 
 Which components need to change together.
+
+## Boundary Map
+
+Given two components:
+
+<table>
+<tr>
+<th>Reactivity</th><th>Interactivity</th><th>Consistency</th><th>Evolution</th><th>Summary</th>
+</tr>
+<tr>
+<td>No</td><td>Command</td><td>Atomic</td><td>Synchronous</td><td>High Coupling</td>
+</tr>
+<tr>
+<td>Yes</td><td>Command</td><td>Atomic</td><td>Synchronous</td><td>High Coupling - Circular Reference</td>
+</tr>
+<tr>
+<td>No</td><td>Command</td><td>Eventual</td><td>Synchronous</td><td>Highly Coupled Services</td>
+</tr>
+<tr>
+<td>Yes</td><td>None</td><td>Eventual</td><td>Asynchronous</td><td>Event Driven</td>
+</tr>
+</tr>
+</table>

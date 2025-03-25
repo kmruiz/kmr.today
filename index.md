@@ -1,5 +1,6 @@
 ---
 layout: default.liquid
+title: Latest Posts
 pagination:
   include: All
   per_page: 9
@@ -17,33 +18,13 @@ pagination:
 {% endfor %}
 </ul>
 
-<div>
-  {% if paginator.previous_index %}
-  <span>
-    <a
-    href="/{{ paginator.previous_index_permalink }}">Previous</a>
-  </span>
-  {% endif %}
-  {% if paginator.next_index %}
-  <span>
-    <a
-    href="/{{ paginator.next_index_permalink }}">Next</a>
-  </span>
-  {% endif %}
-
-  <div>
-    {{ paginator.index }} / {{ paginator.total_indexes }}
-  </div>
-  <div>
-    {% if paginator.previous_index %}
-    <span>
-      <a href="/{{ paginator.first_index_permalink }}">First</a>
-    </span>
-    {% endif %}
-    {% if paginator.next_index %}
-    <span>
-      <a href="/{{ paginator.last_index_permalink }}">Last</a>
-    </span>
-    {% endif %}
-  </div>
+<div id="pagination">
+  <ol>
+	{% if paginator.previous_index %}
+	<li><a data-ctrl="P" href="/{{ paginator.previous_index_permalink }}"><span>^P</span> Previous Page</a></li>
+	{% endif %}
+	{% if paginator.next_index %}
+	<li><a data-ctrl="N" href="/{{ paginator.next_index_permalink }}"><span>^N</span> Next Page</a></li>
+	{% endif %}	
+  </ol>
 </div>

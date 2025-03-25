@@ -23,3 +23,24 @@ window.addEventListener('load', () => {
 	main.focus();
     }
 });
+
+window.addEventListener('load', () => {
+    const paginationPreviousPage = document.querySelector("#pagination a#previous");
+    const paginationNextPage = document.querySelector("#pagination a#next")
+
+    if (paginationPreviousPage || paginationNextPage) {
+	window.addEventListener('keydown', (event) => {
+	    if (event.which == 33 && paginationPreviousPage) {
+		event.stopPropagation();
+		event.preventDefault();
+		
+		window.location.href = paginationPreviousPage.getAttribute("href");
+	    } else if (event.which == 34 && paginationNextPage) {
+		event.stopPropagation();
+		event.preventDefault();
+		
+		window.location.href = paginationNextPage.getAttribute("href");
+	    }
+	});
+    }
+});
