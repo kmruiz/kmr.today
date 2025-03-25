@@ -1,7 +1,7 @@
 
 site:
-  title: kmruiz.today
+  title: kmr.today
   description: Just the thoughts of a developer
-  base_url: https://kmruiz.today
+  base_url: https://kmr.today
 posts:
   rss: rss.xml
