@@ -1,0 +1,7 @@
+
+site:
+  title: kmruiz.today
+  description: Just the thoughts of a developer
+  base_url: https://kmruiz.today
+posts:
+  rss: rss.xml

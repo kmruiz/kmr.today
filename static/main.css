@@ -1,0 +1,139 @@
+html {
+    --color-gray-0: hsl(150, 0%, 11%);
+    --color-gray-9: hsl(150, 0%, 80%);
+
+    --color-green: hsl(129, 25%, 58%);
+    --color-blue:  hsl(250, 45%, 80%);
+    --color-pink:  hsl(290, 45%, 66%);
+    --color-cyan: cyan;
+    
+    --font-primary: 'monospace';
+    --font-code: 'monospace';
+
+    --font-size-xl: 24px;
+    --font-size-l: 19px;
+    --font-size-m: 16px;
+    --font-size-s: 14px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+
+    height: 100vh;
+    overflow: hidden;
+}
+
+body {
+    width: 80ch;
+    margin: auto;
+    
+    background-color: var(--color-gray-0);
+    color: var(--color-gray-9);
+    font-family: var(--font-primary);
+}
+
+h1 {
+    font-size: var(--font-size-m);
+    font-weight: bold;
+}
+
+h1 > span:nth-child(1) {
+    color: var(--color-green);
+}
+
+h1 > span:nth-child(2) {
+    color: var(--color-gray-9);
+}
+
+h1 > span:nth-child(3) {
+    color: var(--color-blue);
+}
+
+h2 {
+    font-size: var(--font-size-l);
+    letter-spacing: 2px;
+}
+
+main {
+    height: 90vh;
+    max-height: 90vh;
+    overflow-y: auto;
+    text-align: justify;
+}
+
+main em {
+    color: var(--color-cyan);
+}
+
+main ul {
+    list-style: none;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+main ul li {
+    padding-left: 1ch;
+    text-indent: -3ch;
+}
+
+main ul li:before {
+    content: "*";
+    color: var(--color-pink);
+    font-weight: bold;
+    padding-right: 0.5ch;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 80ch;
+}
+
+footer > ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+footer > ul > li > a {
+    width: 2em;
+    color: var(--color-gray-9);
+    text-decoration: none;
+}
+
+footer > ul > li > a > span {
+    width: 2em;
+    background-color: var(--color-gray-9);
+    color: var(--color-gray-0);
+}
+
+pre[style] {
+    background-color: inherit !important;
+    border-left: 1ch solid var(--color-gray-9);
+    padding-left: 2ch;
+    margin-left: 4ch;
+    font-family: var(--font-code);
+    font-size: var(--font-size-m);
+}
+
+table {
+    text-align: left;
+    border: 2px dashed var(--color-gray-9);
+}
+
+table th {
+    border-bottom: 2px dashed var(--color-gray-9);
+}
+
+table tr:nth-of-type(2n) {
+    color: var(--color-green);
+}
+
+table tr:nth-of-type(2n+1) {
+    color: var(--color-blue);
+}
+
+table tr:first-child {
+    color: var(--color-gray-9);
+}
