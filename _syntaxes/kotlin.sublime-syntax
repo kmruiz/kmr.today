@@ -1,0 +1,94 @@
+%YAML 1.2
+---
+name: Kotlin
+file_extensions:
+  - kt
+  - kts
+scope: source.kotlin
+
+contexts:
+  main:
+    - include: comments
+    - include: strings
+    - include: annotations
+    - include: keywords
+    - include: numbers
+    - include: operators
+    - include: punctuation
+    # Fallback for identifiers.
+    - match: \b[A-Za-z_][A-Za-z0-9_]*\b
+      scope: identifier.kotlin
+
+  # Comment definitions (line and block comments with nesting)
+  comments:
+    - match: '//.*$'
+      scope: comment.line.double-slash.kotlin
+    - match: '/\*'
+      scope: comment.block.kotlin
+      push: block_comment
+
+  block_comment:
+    - meta_scope: comment.block.kotlin
+    - match: '/\*'
+      scope: comment.block.kotlin
+      push: block_comment
+    - match: '\*/'
+      pop: true
+    - match: '[^*/]+'
+      scope: comment.block.kotlin
+    - match: '[*/]'
+      scope: comment.block.kotlin
+
+  # String definitions: triple-quoted strings, double-quoted strings, and character literals.
+  strings:
+    - match: '"""'
+      scope: string.quoted.multi.kotlin
+      push: triple_string
+    - match: '"'
+      scope: string.quoted.double.kotlin
+      push: double_string
+    - match: "'(\\.|[^\\'])'"
+      scope: constant.character.kotlin
+
+  triple_string:
+    - meta_scope: string.quoted.multi.kotlin
+    - match: '"""'
+      pop: true
+    - match: '.'
+      scope: string.quoted.multi.kotlin
+
+  double_string:
+    - meta_scope: string.quoted.double.kotlin
+    - match: '"'
+      pop: true
+    - match: '\\.'
+      scope: constant.character.escape.kotlin
+    - match: '[^"\\]+'
+      scope: string.quoted.double.kotlin
+
+  # Annotation definitions (e.g. @Deprecated)
+  annotations:
+    - match: '@[A-Za-z_][A-Za-z0-9_]*'
+      scope: storage.type.annotation.kotlin
+
+  # Kotlin keywords
+  keywords:
+    - match: \b(abstract|annotation|as|break|by|catch|class|companion|const|constructor|continue|crossinline|data|do|dynamic|else|enum|external|false|final|finally|for|fun|if|in|infix|init|inline|inner|interface|internal|is|it|lateinit|noinline|null|object|open|operator|out|override|package|private|protected|public|reified|return|sealed|super|this|throw|true|try|typealias|when|where|while|var|val)\b
+      scope: keyword.control.kotlin
+
+  # Operators
+  operators:
+    - match: '[-+*/%=&|<>!]+'
+      scope: keyword.operator.kotlin
+
+  # Number literals (hex and decimal)
+  numbers:
+    - match: \b0[xX][0-9a-fA-F]+\b
+      scope: constant.numeric.hex.kotlin
+    - match: \b\d+(\.\d+)?([eE][+-]?\d+)?\b
+      scope: constant.numeric.kotlin
+
+  # Punctuation characters
+  punctuation:
+    - match: '[{}()\[\].,;:]'
+      scope: punctuation.separator.kotlin

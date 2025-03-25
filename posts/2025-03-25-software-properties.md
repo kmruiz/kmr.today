@@ -1,6 +1,5 @@
 ---
 layout: default.liquid
-
 title: Software properties, not paradigms
 ---
 
@@ -108,11 +107,11 @@ of the shape they have.
 Components are not alone in a system: they need to react to changes in other components. The surface between
 these two components is the reactivity boundary.
 
-### Interactivity Boundaries
+### Proactivity Boundaries
 
 Components need to command other components to fulfill a business requirement. Usually components will
 interact through some kind of interface, either being a function call or a method call. The surface
-of interaction is the interactivity boundaries.
+of interaction is the proactivity boundaries.
 
 ### Consistency Boundaries
 
@@ -121,32 +120,101 @@ owning the data. The relationship of the components through their data is the co
 
 ### Evolution Boundaries
 
-Which components need to change together.
+As components interact, in any way, they need also to change. How these components change together is
+also a property of the system that is relevant for building approachable and scalable software.
 
-## Boundary Map
+## Choose **properties** and _tradeoffs_
 
-Given two components:
+As they can surface useful and expected behaviour.
 
-<table>
-<tr>
-<th>Reactivity</th><th>Interactivity</th><th>Consistency</th><th>Evolution</th><th>Summary</th>
-</tr>
-<tr>
-<td>No</td><td>Command</td><td>Atomic</td><td>Synchronous</td><td>High Coupling</td>
-</tr>
-<tr>
-<td>Yes</td><td>Command</td><td>Atomic</td><td>Synchronous</td><td>High Coupling</td>
-</tr>
-<td>No</td><td>Command</td><td>Causal</td><td>Synchronous</td><td>Composition</td>
-</tr>
-<tr>
-<td>Yes</td><td>Command</td><td>Causal</td><td>Synchronous</td><td>Reactive Composition</td>
-</tr>
-<tr>
-<td>No</td><td>Command</td><td>Eventual</td><td>Synchronous</td><td>Highly Coupled Services</td>
-</tr>
-<tr>
-<td>Yes</td><td>None</td><td>Eventual</td><td>Asynchronous</td><td>Event Driven / Callback</td>
-</tr>
-</tr>
-</table>
+### 1. Modules that evolve together benefit of being tighly coupled
+
+Think about having two functions that solve a subset of the same problem. They are likely to be changed together
+when we are implementing a new feature.
+
+```js
+const buildInvoice = lines => {
+   return { 
+	lines, 
+	total: lines.map((line) => line.total)
+                .reduce((a, b) => a + b) 
+   }
+}
+
+const applyVat = vat => invoice => {
+	return {
+	   ...invoice,
+	   subtotal: invoice.total,
+	   total: invoice.total + (invoice.total * vat)
+	};
+}
+
+const generateInvoice = lines => applyVat(VAT)(buildInvoice(lines))
+```
+
+Simple, tightly coupled modules, when the surface is under control, have the benefit of being _extremely easy to change and test_.
+Playing with coupling can provide wonderful benefits into your code base.
+
+### 2. Modules that do not evolve together should be at most eventually consitent.
+
+It's hard to guarantee consistency when a module changes more frequently than other, as there is a trend for rules to
+collide and break. Eventual consistency simplifies this by separating data sources and deriving state, instead of sharing
+state.
+
+### 3. Reactivity boundaries are as important as Proactivity boundaries
+
+It's common to define contracts on how we proactively interact with other modules. However, _when_ components react to
+other component changes is extremely complicated and there are few languages that support it out of the box. Leveraging
+Pub/Sub in Java, Flow in Kotlin, Rx on multiplatform code allows to model these reactivity boundaries in the type system.
+
+An example in Kotlin on using MutableStateFlow:
+
+```kt
+val clickEvents = MutableStateFlow(emptyList())
+val telemetryEvents = MutableStateFlow(emptyList())
+
+clickEvents.collectLatest {
+   telemetryEvents.tryEmit(TelemetryEvent(CLICK, it))
+}
+```
+
+We could use also other operators like _map_, which in theory, should simplify the code:
+
+```kt
+val clickEvents = MutableStateFlow(emptyList())
+val telemetryEvents = clickEvents.map { TelemetryEvent(CLICK, it) }
+```
+
+However, by doing this, we are shifting the consistency model to _causal_ (there is a linear
+strong relationship in time) instead of _eventual_. This increases the coupling, which might
+be beneficial:
+
+```kt
+// 1.
+val clickEvents = MutableStateFlow(emptyList())
+val keyboardEvents = MutableStateFlow(emptyList())
+val telemetryEvents = MutableStateFlow(emptyList())
+
+clickEvents.collectLatest {
+   telemetryEvents.tryEmit(TelemetryEvent(CLICK, it))
+}
+
+keyboardEvents.collectLatest {
+   telemetryEvents.tryEmit(TelemetryEvent(KEYBOARD, it))
+}
+
+// 2.
+val clickEvents = MutableStateFlow(emptyList())
+val keyboardEvents = MutableStateFlow(emptyList())
+val telemetryEvents = combine(
+ clickEvents.map { TelemetryEvent(CLICK, it) },
+ keyboardEvents.map { TelemetryEvent(KEYBOARD, it) }
+)
+```
+
+In the first example, telemetryEvents is decoupled from the source of data, which makes it easier
+to evolve outside the boundaries of their reactivity boundaries. In the second example, telemetryEvents
+is a combination of existing flows, which makes impossible evolving telemetryEvents outside of the
+reactivity boundaries.
+
+And both properties are useful depending on the use case.
