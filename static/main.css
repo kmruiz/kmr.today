@@ -6,6 +6,7 @@ html {
     --color-blue:  hsl(250, 45%, 80%);
     --color-pink:  hsl(290, 45%, 66%);
     --color-cyan: cyan;
+    --color-orange: hsl(30, 56%, 50%);
     
     --font-primary: 'monospace';
     --font-code: 'monospace';
@@ -50,11 +51,6 @@ h1 > span:nth-child(3) {
     color: var(--color-blue);
 }
 
-h2 {
-    font-size: var(--font-size-l);
-    letter-spacing: 2px;
-}
-
 main {
     height: 90vh;
     max-height: 90vh;
@@ -62,8 +58,16 @@ main {
     text-align: justify;
 }
 
-main em {
+main:focus {
+    outline: 0;
+}
+
+main em, main i {
     color: var(--color-cyan);
+}
+
+main strong, main b {
+    color: var(--color-orange);
 }
 
 main ul {
@@ -96,13 +100,13 @@ footer > ul {
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-footer > ul > li > a {
+footer > ul > li > a, ul#index > li > a {
     width: 2em;
     color: var(--color-gray-9);
     text-decoration: none;
 }
 
-footer > ul > li > a > span {
+footer > ul > li > a > span, ul#index > li > a > span {
     width: 2em;
     background-color: var(--color-gray-9);
     color: var(--color-gray-0);
@@ -136,4 +140,29 @@ table tr:nth-of-type(2n+1) {
 
 table tr:first-child {
     color: var(--color-gray-9);
+}
+
+h2 {
+    border-left: 0.5ch solid var(--color-green);
+    color: var(--color-green);
+    font-size: var(--font-size-m);
+    padding-left: 0.5ch;
+}
+
+h3 {
+    border-left: 1ch solid var(--color-pink);
+    color: var(--color-pink);
+    font-size: var(--font-size-m);
+    padding-left: 1ch;
+}
+
+h4 {
+    border-left: 2ch solid var(--color-blue);
+    color: var(--color-blue);
+    font-size: var(--font-size-m);
+    padding-left: 2ch;
+}
+
+img {
+    width: 100%;
 }

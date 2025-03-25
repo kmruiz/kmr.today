@@ -9,7 +9,6 @@ window.addEventListener('load', () => {
     }
 
     window.addEventListener('keydown', (event) => {
-	console.log(event.key);
 	if (event.ctrlKey && allCallbacks[event.key]) {
 	    event.stopPropagation();
 	    event.preventDefault();
@@ -18,5 +17,9 @@ window.addEventListener('load', () => {
 	    return false;
 	}
     }, false);
-    
+
+    const main = document.querySelector("main");
+    if (main) {
+	main.focus();
+    }
 });
