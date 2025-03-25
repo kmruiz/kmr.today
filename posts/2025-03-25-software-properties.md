@@ -218,3 +218,21 @@ is a combination of existing flows, which makes impossible evolving telemetryEve
 reactivity boundaries.
 
 And both properties are useful depending on the use case.
+
+### 4. Module identity is based on their properties and business logic, not code.
+
+This is important when refactoring. When we see two snippets of code that are similar, we tend to
+merge them into a single function or class so it can be reused. What this actually does is reducing
+two modules, with their own properties, to one single module.
+
+Before merging code, consider each module properties.
+
+### 5. Reduce boundaries to the minimum
+
+Avoid fanning-in or fanning-out relationship between modules. If this is necessary, favour eventual
+consistency, favour reactivity and disregard proactivity: this will make your modules easier to reason
+about.
+
+## So, essentially, be intentional in what properties of your system you want to enforce
+
+This will give you leverage and make your software better for your use case.  
