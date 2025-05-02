@@ -179,3 +179,9 @@ div#pagination {
     margin-top: 2ch;
     margin-left: auto;
 }
+
+div.fun-fact {
+    margin: 0 10em;
+    border: 1px dashed var(--color-gray-9);
+    padding: 1em;
+}

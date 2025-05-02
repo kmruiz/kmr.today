@@ -4,6 +4,10 @@ title: Software delivery is about forecasting, not foreseeing
 tags: [ delivery ]
 ---
 
+<div class="fun-fact">
+If you manage to read all of this, there is a fun fact at the end of this post.
+</div>
+
 As any developer with a minimum amount of experience delivering software, I had to manage
 software projects. From having a long and boring Functional Architecture Document to not
 having a ticket in JIRA _at all_. Either way, it was my responsibility to deliver it
@@ -132,3 +136,8 @@ using Monte Carlo, there are some questions that can be statistically answered t
 The team just "estimates" story points, but now they are not estimating time, they are estimating uncertainty: that's the natural
 meaning of story points. Building the script and some additional tools on our JIRA took a few days of work (you know, burn downs,
 team stats and so on) and the script takes a second to run, so I can keep track of the delivery date weekly easily.
+
+## The fun fact
+
+In my mother tongue [(Catalan)](https://en.wikipedia.org/wiki/Catalan_language) we have the word "Estimar", which is pretty close
+to "estimate". However, the meaning is pretty different. In Catalan, "Estimar" is "To love someone".
