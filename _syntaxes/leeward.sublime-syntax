@@ -1,0 +1,55 @@
+%YAML 1.2
+---
+name: Leeward
+file_extensions:
+  - lw
+scope: source.leeward
+
+contexts:
+  main:
+    - include: comments
+    - include: strings
+    - include: keywords
+    - include: symbols
+    - include: identifiers
+    - include: numbers
+
+  comments:
+    - match: '//.*$'
+      scope: comment.line.double-slash.leeward
+    - match: '/\*'
+      scope: comment.block.leeward
+      push:
+        - meta_scope: comment.block.leeward
+        - match: '\*/'
+          pop: true
+
+  strings:
+    - match: "'"
+      scope: punctuation.definition.string.begin.leeward
+      push:
+        - meta_scope: string.quoted.single.leeward
+        - match: "'"
+          scope: punctuation.definition.string.end.leeward
+          pop: true
+        - match: "\\."
+          scope: constant.character.escape.leeward
+
+  keywords:
+    - match: \b(intrinsic|extern|use|if|else|while|for|return)\b
+      scope: keyword.control.leeward
+
+    - match: \b(let|type|struct)\b
+      scope: storage.type.definition.leeward
+
+  symbols:
+    - match: ':[a-zA-Z_]\w*'
+      scope: constant.symbol.leeward
+
+  numbers:
+    - match: \b\d+\b
+      scope: constant.numeric.leeward
+
+  identifiers:
+    - match: \b[a-zA-Z_]\w*\b
+      scope: variable.other.leeward
