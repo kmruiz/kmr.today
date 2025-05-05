@@ -271,7 +271,15 @@ last minute changes.
 
 One way to think about it: software design is like juggling. Not all the balls have the same weight or value. The parts of your system that evolve fast, change often, or
 carry the actual business value are the ones that you don't want to let fall onto the floor. They are the ones that deserve more care, more intentional boundaries and more
-flexibility.
+flexibility. This is personally how I think about it:
+
+| Level | Mindset                             | Behavior                                                                 | Pain                                                                 | Lesson                                |
+|-------|-------------------------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------|
+| 1     | **Speculative Design**              | Premature patterns, deep abstractions, forced layering                  | Everything is abstract, nothing is easy to change                   | You can't out-design unknowns.        |
+| 2     | **Local Patching**                  | Quick fixes, accidental coupling, “just make it work” mentality         | Change spreads unpredictably, regressions become common             | Local fixes don’t scale.              |
+| 3     | **Observation and Restraint**       | Flat structure, minimal abstraction, wait-and-see design                | Can be messy, but changes are local and traceable                 | Monitoring change reveals true boundaries.     |
+| 4     | **Intentional Coupling**            | Group what changes together, accept dependencies                        | Fear of change decreases and business domains become more clear    | Business alignment beats elegance and patterns             |
+| 5     | **Purposeful Decoupling**           | Split only when benefits are tangible (clarity, speed, deployability)   | Boundaries feel earned, not imposed                                 | Good design respects and understands when to pay the cost of change.  |
 
 ## Now closing...
 
