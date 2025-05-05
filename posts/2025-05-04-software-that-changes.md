@@ -14,11 +14,18 @@ And it made me think, this is exactly what happens in software design.
 We build systems based on assumptions, about business rules, dependencies, stability, everything. And then, changes.
 Requirements change, data is wrong, the timeline moves and you need to deliver on time.
 
-So while I wait sitting on the floor at Barcelona's airport, and because I need to prepare some content for the team
-gathering on Copenhagen, I want to share a few thoughts about how to build
-software that changes well. And why most of our assumptions in design time don't hold well.
+So while I wait sitting on the floor at Barcelona's airport, and because I need to prepare some content for the team gathering
+on Copenhagen, I want to share a few thoughts about how to build software that changes well. And why most of our assumptions in 
+design time don't age well.
 
-From my experience I believe this is the core problem:
+Early in my career I believed good design meant anticipating every change up front. I tried to get the architecture right before
+building the thing. And like many others before, I learned the hard way that change doesn't care about your diagrams or patterns.
+
+I believe this post can be useful for anyone who's ever felt confused about why their well-structured code got harder over time. Or
+maybe why their "messy" code was easier to change than expected. That confusion isn't a failure. It's the beginning of the path to
+being a software architect.
+
+From my experience I believe this is the core problem of software design:
 
 <div class="fun-fact">
 Maintainability degrades as code accumulates. More code means more surface area for confusion, coupling and decay.
@@ -159,7 +166,7 @@ made our system resilient to downtime from these peer legacy systems.
 The core logic of the system was implemented using just two Java classes:
 
 * Offer: encapsulated all the rules and calculations to generate a snapshot of the offer.
-* (IIRC) OfferPrinter: handled the generation of the PDF for the customer.
+* OfferPrinter: handled the generation of the PDF for the customer.
 
 Everything the salesperson needed was there. It wasn't glamorous, no fancy design patterns, no [Death by Glamour](https://www.youtube.com/watch?v=Q9kDr4na0ls) but it
 was predictable, testable and easy to evolve. When the business changed the rules, we knew exactly where to go.
@@ -207,7 +214,7 @@ It also becomes easier to see what should be split, because it will restrain the
 same module, doesn't mean they will be there forever.
 
 Things that don't change together, can be in different modules, even compilation units and deployment units if we want to. Where to put them
-will depend on mutiple factors, like for example:
+will depend on multiple factors, like for example:
 
 * Cost
 * Scalability
@@ -216,7 +223,7 @@ will depend on mutiple factors, like for example:
 * Security
 * Privacy
 * Consistency
-* Data Sovereignity
+* Data Sovereignty
 
 However, deciding how to split based on these properties and when depends on the expertise of the developer.
 
@@ -266,19 +273,21 @@ Not all parts of a system change equally. Some areas are in constant motion, oth
 In Domain Driven Design, this is the difference between core domains (where the competitive advantage lives and where you focus) and supporting domains. In Wardley Mapping,
 it's the journey from genesis to commodity.
 
-These models show us a key concept: change is uneven. Some parts of the system will fail apart first. They will be volatile and have unclear boundaries and suffer from
+These models show us a key concept: change is uneven. Some parts of the system will fall apart first. They will be volatile and have unclear boundaries and suffer from
 last minute changes.
 
 One way to think about it: software design is like juggling. Not all the balls have the same weight or value. The parts of your system that evolve fast, change often, or
 carry the actual business value are the ones that you don't want to let fall onto the floor. They are the ones that deserve more care, more intentional boundaries and more
-flexibility. This is personally how I think about it:
+flexibility. This is personally how I think about it.
+
+And if you see yourself in this ladder, do not worry, you are not alone. Most of us climb this ladder the hard way. That's how the lessons stick in our minds.
 
 | Level | Mindset                             | Behavior                                                                 | Pain                                                                 | Lesson                                |
 |-------|-------------------------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------|
 | 1     | **Speculative Design**              | Premature patterns, deep abstractions, forced layering                  | Everything is abstract, nothing is easy to change                   | You can't out-design unknowns.        |
 | 2     | **Local Patching**                  | Quick fixes, accidental coupling, “just make it work” mentality         | Change spreads unpredictably, regressions become common             | Local fixes don’t scale.              |
 | 3     | **Observation and Restraint**       | Flat structure, minimal abstraction, wait-and-see design                | Can be messy, but changes are local and traceable                 | Monitoring change reveals true boundaries.     |
-| 4     | **Intentional Coupling**            | Group what changes together, accept dependencies                        | Fear of change decreases and business domains become more clear    | Business alignment beats elegance and patterns             |
+| 4     | **Intentional Coupling**            | Group what changes together, accept dependencies                        | Fear of change decreases and business domains become more clear    | Alignment with the business boundaries beats elegance and over designing. |
 | 5     | **Purposeful Decoupling**           | Split only when benefits are tangible (clarity, speed, deployability)   | Boundaries feel earned, not imposed                                 | Good design respects and understands when to pay the cost of change.  |
 
 ## Now closing...
@@ -294,3 +303,6 @@ It's not glamorous. There are no silver bullets, no architectural theatre. But i
 <div class="fun-fact">
 Overdesigned software doesn't fail by accident. It dies by glamour.
 </div>
+
+And if you are still finding issues with your designs: be patient. Every refactor that goes unexpectedly wrong, every dependency that you don't know how to model, it's
+all part of the journey. You get used to it and it gets more interesting with time.
