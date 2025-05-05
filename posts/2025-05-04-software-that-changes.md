@@ -7,12 +7,14 @@ tags: [ software design ]
 Now I am at the airport because my flight has been delayed for two hours. During this week,
 my team is gathering in Copenhagen and we are preparing workshops, talks and discussions as a way to
 do team building and align our expectations and team practices. Guess what, I'll use this dead time
-waiting in Barcelona's Airport (Josep Tarradellas) preparing some content that I can reuse later.
+waiting in Barcelona's Airport  preparing some content that I can reuse later.
 
 I suggested discussing about how to ensure that software is maintainable during active development.
-From my perspective and experience, one of the main issues with code is that maintainability is 
-a property that gets worse with the amount of code. Basically, more code makes an application harder to 
-maintain. But, why is that? 
+From my experience I believe this is the core problem:
+
+<div class="fun-fact">
+Maintainability degrades as code accumulates. More code means more surface area for confusion, coupling and decay.
+</div>
 
 We usually write code to implement a feature. That's likely not a surprise for you if you are reading
 this post. This code is basically a way to tell a computational unit what to do to solve a specific
@@ -35,7 +37,8 @@ When we translate a requirement like, for example:
 
 > All user transactions have to be stored and accessible by the user.
 
-There are a lot of cultural, semantic, legal assumptions developers have to make to implement this feature.
+There are a lot of cultural, semantic, legal assumptions developers have to make to implement this feature. It opens dozens
+of questions.
 
 * Can a user see other user transactions?
 * What data is relevant to show to the user?
@@ -75,29 +78,26 @@ most developers on these technologies is pretty shallow.
 
 ## Knowing technologies makes your job easier, but it's not enough
 
-Knowing how PHP caches the connection to the database, when does the Java GC kicks in, when to use React's useEffect, or
-if Python default arguments are mutable singletons is helpful, **but not enough**. Good software is complicated, and
-we are at the point where _usually_ for _non specialised software_ like web applications, what technology you choose 
-is not relevant anymore. 
+Knowing the quirks of PHP's database connection caching, how and when Java's GC kicks in, that Python's default arguments are
+mutable singletons or when to use React's useEffect is useful. But none of these guarantee good software.
 
+For most non-specialised domains, like the typical web app or mobile application, the specific technology you choose is often
+secondary. The choice still matters for things like performance, cost, team speed or security, but they rarely determine if a
+system is maintainable or correct. There are languages that are more dense and can contain more information (Rust for example),
+but they are not enough.
 
-<div class="fun-fact">
-Here we are discussing maintainability, choosing a technology is relevant for oher properties like performance,
-cost, team velocity, security...
-</div>
-
-You can write good software with any technology, if you:
+Because in the end, you can build maintainable software in almost any stack if you:
 
 * Know what to do: _The business_
 * Know how to do it: _The technology_
 
-The complicated part for _non specialised sotware_ is the "what to do", and this is what we are going to cover now.
+And in most projects the hard part isn't the "how", it is the what. That's where most systems fail and that's what we are going to
+focus.
 
 ## What the software does is not obvious
 
-A software codebase is a snapshot of the translation of the business knowledge by a team or organisation. Eventually,
-while the business evolves, also this snapshot evolves: assumptions are going to be broken, features are going to be implemented
-and new customers are going to pay for your software.
+A software codebase is a frozen translation of the business knowledge by an organisation at a specific point in time. As the business
+evolves, so does the code, but unevenly. Assumptions get outdated and new code layers on top of half-baked abstractions.
 
 A software usually has several modules, or units, that solve specific problems. In Domain Driven Design, depending on
 several factors, we may call them aggregates, domains, bounded contexts... And these modules have a relationship between them:
@@ -111,47 +111,45 @@ This happens at multiple levels:
 * A component requires other child components
 * An event bubbles up on a DOM tree
 
-These are different levels of interaction, and they are affected by different levels of coupling. Interaction between modules
-or systems are the secret sauce, and the main complexity of changing software. If your software doesn't interact with anyone,
-it's useless.
+These are different levels of interaction, and they are affected by different levels of coupling.
+**If your software doesn't interact with anything, it's useless. When in interacts, it becomes a system.**
 
 ### Designing interactions is essential for evolving software
 
-I'm tired of scrolling in LinkedIn or Reddit and seeing developers discuss what is the best folder structure, or discussing if
-MVC is deprecated, if you should use the latest technology because it gives you a template on how to do things. **Conventions**
-are useful, but they are not important.
+Developers love to debate folder structures, design patterns and the latest tech trends. You'll see endless threads about MVC being
+obsolete, or which framework enforces best practices by default. But none of that matters in the long term if the boundaries are wrong.
 
-What is important is domain boundaries and interactions. When I was working as a MongoDB Consulting Engineer, basically, the guy
-that helps you run MongoDB in your company the best way possible, one of the things I used to say is: _Data that is read together 
-is stored together_. This is kind of the motto of the document model, and also _of good software design_ (but with a small tweak).
+** Conventions are helpful, add familiarity to a problem, but they don't solve the hard problems. **
+
+Designing interactions and boundaries that reflect how the business actually works. When 
+
+What is important is domain boundaries and interactions. When I was working as a MongoDB Consulting Engineer, 
+one of the core principles I used to share was: _Data that is read together is stored together_. This is kind of 
+the motto of the document model, and also _of good software design_ (but with a small tweak).
 
 The essential motto that describes maintainable and efficient software is:
 
 #### Code that changes together stays together
 
-* It doesn't matter if there is some duplication.
-* It doesn't matter if there is some coupling.
-* It doesn't matter if there is there are tons of line of code.
+This is not about obsessing over how code looks like, avoiding duplication or minimising the amount of lines of code in your file. It's about
+putting the right responsibilities next to each other, so change is predictable, local and change. Predictability in software design is one of the
+most underrated properties.
 
-Code aesthetics are not relevant, how code is structured and modules interact makes the difference.
+The best developers I've worked with have a wonderful sense of what belongs together. It's like a spider-sense for architecture, and gets better
+when you improve your understanding of the  business domain.
 
-In business, features define how different areas work together. It's essential to be able to tail relationships,
-and the best developers have an special spider-sense to understand what things need to be close. This is far
-easier when you understand the actual business domain. New features will shape the architecture and the interactions
-between components, but if you can guess a direction, it just makes everything easier.
+We are taught to fear coupling, **but intentional coupling can improve maintainability.**.  It's easier to split one function into two than to make
+two isolated systems with separate assumptions work together.
 
-Because, _despite what the common understanding is about coupling_, **intentional coupling improves maintainability**. It's easier to split
-a function in two halfs than making two entire systems with their assumptions work together. Because when we split something, we make
-a lot of assumptions and hidden decisions that _might be wrong_ and harm maintainability and other properties of the codebase.
+Let's take billing and shipping, as example domains.
 
-Take for example two loosely coupled modules: billing and shipping. They might have a single point on contact: when the order is billed,
-a notification is sent to the shipping system, which prepares the shipping. However what if the final price depends on the shipping method? You'll
-need another interaction so the billing system gets the actual shipping price. 
+You might want to start with a clean boundary: billing notifies shipping when an order is paid. But what would happen when the shipping costs need to
+be included in the final price? Now billing depends on shipping and there is a circular dependency. And this happens because the business logic decided
+that they need to be coupled. There is no way around that.
 
-These interactions add coupling because the business is designed to be coupled: artificially splitting them makes everything harder. While there
-_might_ be some benefits on decoupling modules, we can't force these benefits if the business model requires them coupled. So, in essence:
+Forcing decoupling here creates fiction, not clarity.
 
-#### Two modules are at least as coupled as the business requirements they are responsible for
+#### Two modules are at least as coupled as the business requirements they implement.
 
 By accepting this, we can intentionally design better software.
 
@@ -171,35 +169,55 @@ will depend on mutiple factors, like for example:
 * Consistency
 * Data Sovereignity
 
-#### Danger gravitate around the biggest modules
+However, deciding how to split based on these properties and when depends on the expertise of the developer.
 
-When working with different modules, people tend to refactor into different functions or classes, or any other topology, to reuse code. By
-doing these refactors, there are some reusable chunks of code that are smaller and, theoretically, easier to maintain. However, it's important
-to clarify that the size of the module is not in the amount of code but in the amount of responsibilities and usages. 
+#### Danger gravitates around the biggest modules
 
-If you have a Repository class that 30% of your code depends on, because it has some utility methods, any change on that class can break 30% of your
-code. That has an extreme impact on maintainability as it makes all these modules that depend on the Repository fragile over changes on the root class.
-If a change on the repository has to be done, like for example, optimising a query or using a connection pool, the impact surface is huge both in the
-positive way and it's risk.
+When working across modules, developers often refactor common logic into reusable functions or classes. That's fine, until that shared code becomes
+a liability.
 
-Also, it's not a 1 or 0 situation. Changes on shared modules can work on some of the dependents, but break others, as it's hard to ensure Liskov as
-programming languages don't have a way to ensure invariants, and even more when they might depend on external services like a database.
+A module isn't big because of how many lines it has. It's big when it takes on too many responsibilities or has too many dependencies.
+
+Take, for example, a Repository class that 30% of your codebase depends on because it includes handy utility methods for querying the database. Now
+every change to that class, whether it's a performance tweak or a connection pooling fix, comes with risk. You're affecting a third of your system.
+That kind of blast radius makes changes expensive even when they seem beneficial.
+
+And it's rarely 1 or 0. A change might work perfectly for one consumer of the class but break another, worst case scenario, silently. Most languages don't
+help there because they can't enforce all invariants. They can't guarantee that a module still behaves the way all its callers expect, especially if that
+module depends on external services like databases.
+
+Liskov Substitution sounds great on paper, but in practice, you can't verify behavioural compatibility across all consumers. That's where the real danger lives,
+in shared assumptions you didn't know were made. Testing and monitoring can help, but they can't fix the problem.
 
 #### Don't split a module until you need it
 
-Prematurely splitting forces you to make assumptions that might be incorrect. If you are a domain expert, and know how things are going to evolve, you
-can relatively guide the direction of the design with care. However, you'll realise that lots of times you don't need to split modules as they are not
-that big and never become a burden.
+Premature splitting is ofter just intellectual vanity. It creates the illusion of thoughtful design, but at the end is just guessing.
+
+Unless you deeply understand the domain and can anticipate how the system will evolve, you're likely guessing wrong. And even if you do
+get it right, chances are that the module wasn't going to grow into a real problem.
+
+In software design, patience is a virtue. The first signs of pain aren't always a call to action: they are a cue to watch closely your design.
+A good software architect is stoic: resists the urge to reestructure at the first discomfort. Most design flaws expose themselves when they are
+real. Until then, waiting, often leads to better decisions.
 
 #### Don't overcommit to a design, until that business area becomes a commodity
 
-In business, not all areas evolve at the same pace: there are areas where we invest more resources and time, and require fast changes, and there are other
-areas that become a commodity and might not require more changes. If you need change things fast, keep designs simple, do not overencapsulate, and always
-design with change on mind.
+In business, not all areas evolve at the same pace. Some areas are in constant motion, they are in their genesis, and are driven by market shifts, experimentation
+or new customer needs. Others settle over time and become commodities, they are stable, well-understood and unlikely to change.
+
+They need to be treated differently.
+
+If you are working on a fast-moving domain, don't overdesign. Avoid deep encapsulation, rigid abstractions or being too clever. Keep it simple, direct, and easy to change.
+The concept that puts everything in motion is the capacity of change. Premature structure locks you into decisions that you might not want to take.
+
+Wait and observe.
 
 ## Now closing...
 
-... good design requires you to understand what you are trying to solve. By mapping the business to your application, understanding how different areas
-interact, do not overdesigning, and being intentional on what you leave in and out of your refactors, makes a productivity boost. And with multiple developers,
-the boost is multiplied.
+... good design starts with understanding of the "what": what you are trying to solve.
 
+When you map the business clearly into your application, when you understand how different modules interact, avoid premature abstractions and refactor with
+intent, you get real leverage and benefits. You get better software and faster teams.
+
+When multiple developers are align around that clarity, the productivity boost is exponential. It requires strong leadership and a thoughtful process to implement
+changes in the codebase, but it pays off.
