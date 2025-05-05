@@ -15,7 +15,7 @@ We build systems based on assumptions, about business rules, dependencies, stabi
 Requirements change, data is wrong, the timeline moves and you need to deliver on time.
 
 So while I wait sitting on the floor at Barcelona's airport, and because I need to prepare some content for the team gathering
-on Copenhagen, I want to share a few thoughts about how to build software that changes well. And why most of our assumptions in 
+in Copenhagen, I want to share a few thoughts about how to build software that changes well. And why most of our assumptions in 
 design time don't age well.
 
 Early in my career I believed good design meant anticipating every change up front. I tried to get the architecture right before
