@@ -134,9 +134,12 @@ These are different levels of interaction, and they are affected by different le
 Developers love to debate folder structures, design patterns and the latest tech trends. You'll see endless threads about MVC being
 obsolete, or which framework enforces best practices by default. But none of that matters in the long term if the boundaries are wrong.
 
-** Conventions are helpful, add familiarity to a problem, but they don't solve the hard problems. **
+**Conventions are helpful, add familiarity to a problem, but they don't solve the hard problems.**
 
-Designing interactions and boundaries that reflect how the business actually works. When 
+In fact, familiarity can work against us. It makes certain design paths feel _natural_ because we've seen them before independently of them
+being the solution to our problem. It encourages assumptions, often too early, and those assumptions are hard to unlearn.
+
+For example, the assumption that every service needs MVC and a repository layer. This doesn't come from necessity, but familiarity.
 
 What is important is domain boundaries and interactions. When I was working as a MongoDB Consulting Engineer, 
 one of the core principles I used to share was: _Data that is read together is stored together_. That's the heart
