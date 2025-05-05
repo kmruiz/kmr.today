@@ -12,7 +12,7 @@ inconveniently and without much warning.
 And it made me think, this is exactly what happens in software design.
 
 We build systems based on assumptions, about business rules, dependencies, stability, everything. And then, changes.
-Requirements change, data is wrong, the timeline moves and you need to deliver on time.
+Requirements change, our assumptions are wrong, the timeline moves and you need to deliver on time.
 
 So while I wait sitting on the floor at Barcelona's airport, and because I need to prepare some content for the team gathering
 in Copenhagen, I want to share a few thoughts about how to build software that changes well. And why most of our assumptions in 
@@ -30,13 +30,6 @@ From my experience I believe this is the core problem of software design:
 <div class="fun-fact">
 Maintainability degrades as code accumulates. More code means more surface area for confusion, coupling and decay.
 </div>
-
-We usually write code to implement a feature. That's likely not a surprise for you if you are reading
-this post. This code is basically a way to tell a computational unit what to do to solve a specific
-problem given an input. I'm not saying a machine because we are way past the time where we were writing
-code for a single machine. While there are lots of developers focusing on more user-facing applications,
-there is a huge percentage of software developers that work on cloud environments, where their applications
-are a mesh that treat a group of machines as a single unit of work.
 
 When we write code, we translate high-level requirements to a consistent and theoretically deterministic language. 
 During this translation process we lose part of the information that was implicit in the requirements because either
@@ -81,13 +74,12 @@ maturity, this issue will stay forever.
 
 I am not against innovation: I believe new languages like Kotlin or Rust are a wonderful evolution for people that
 come from Java or C++. Cloud engineering has boosted team performance (and wasted budget equally). AngularJS was an
-impressive improvement over JQuery. However it's fair to say that our industry tends to waste engineering effort. Probably
-lots of developers would say the same with React, but I find it quite questionable. Maybe I write about it at some point
-during this week.
+impressive improvement over JQuery. However it's fair to say that our industry tends to waste engineering effort on
+reinventing the wheel.
 
 This mindset, rooted in our industry, complicates finding developers who actually know a domain, unless it's a
 highly specialised domain like embedded software, gaming, low-level programming or developer tools. Instead, 
-it's common to look for "technology" developers. Java Developers, React Developers, PHP Developers and so on. While
+it's common to look for _technology_ developers. Java Developers, React Developers, PHP Developers and so on. While
 _it's  fair_ to require knowledge on a specific technology and we need experts on technologies, the actual knowledge of
 most developers on these technologies is pretty shallow.
 
@@ -96,7 +88,7 @@ most developers on these technologies is pretty shallow.
 Knowing the quirks of PHP's database connection caching, how and when Java's GC kicks in, that Python's default arguments are
 mutable singletons or when to use React's useEffect is useful. But none of these guarantee good software.
 
-For most non-specialised domains, like the typical web app or mobile application, the specific technology you choose is often
+For most non-specialised domains, like the typical web app or mobile app, the specific technology you choose is often
 secondary. The choice still matters for things like performance, cost, team speed or security, but they rarely determine if a
 system is maintainable or correct. There are languages that are more dense and can contain more information (Rust for example),
 but they are not enough.
@@ -106,7 +98,7 @@ Because in the end, you can build maintainable software in almost any stack if y
 * Know what to do: _The business_
 * Know how to do it: _The technology_
 
-And in most projects the hard part isn't the "how", it is the what. That's where most systems fail and that's what we are going to
+And in most projects the hard part isn't the _how_, it is the what. That's where most systems fail and that's what we are going to
 focus.
 
 ## What the software does is not obvious
@@ -198,7 +190,7 @@ You might want to start with a clean boundary: billing notifies shipping when an
 be included in the final price? Now billing depends on shipping and there is a circular dependency. And this happens because the business logic decided
 that they need to be coupled. There is no way around that.
 
-Forcing decoupling here creates fiction, not clarity.
+Forcing decoupling here creates friction, not clarity.
 
 #### Two modules are at least as coupled as the business requirements they implement.
 
@@ -280,22 +272,23 @@ These models show us a key concept: change is uneven. Some parts of the system w
 last minute changes.
 
 One way to think about it: software design is like juggling. Not all the balls have the same weight or value. The parts of your system that evolve fast, change often, or
-carry the actual business value are the ones that you don't want to let fall onto the floor. They are the ones that deserve more care, more intentional boundaries and more
-flexibility. This is personally how I think about it.
+carry the actual business value are the ones that you don't want to let fall onto the floor. They are the ones that deserve more care, more intentional boundaries and moreflexibility. This is personally how I think about it.
 
-And if you see yourself in this ladder, do not worry, you are not alone. Most of us climb this ladder the hard way. That's how the lessons stick in our minds.
-
-| Level | Mindset                             | Behavior                                                                 | Pain                                                                 | Lesson                                |
+| | Mindset                             | Behavior                                                                 | Symptom	                                                                 | Lesson                                |
 |-------|-------------------------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------|
 | 1     | **Speculative Design**              | Premature patterns, deep abstractions, forced layering                  | Everything is abstract, nothing is easy to change                   | You can't out-design unknowns.        |
 | 2     | **Local Patching**                  | Quick fixes, accidental coupling, “just make it work” mentality         | Change spreads unpredictably, regressions become common             | Local fixes don’t scale.              |
 | 3     | **Observation and Restraint**       | Flat structure, minimal abstraction, wait-and-see design                | Can be messy, but changes are local and traceable                 | Monitoring change reveals true boundaries.     |
 | 4     | **Intentional Coupling**            | Group what changes together, accept dependencies                        | Fear of change decreases and business domains become more clear    | Alignment with the business boundaries beats elegance and over designing. |
-| 5     | **Purposeful Decoupling**           | Split only when benefits are tangible (clarity, speed, deployability)   | Boundaries feel earned, not imposed                                 | Good design respects and understands when to pay the cost of change.  |
+| 5     | **Purposeful Decoupling**           | Split only when benefits are tangible (clarity, speed, deployability)   | Boundaries feel discovered, not imposed                                 | Good design respects and understands when to pay the cost of change.  |
+
+
+And if you see yourself in this ladder, do not worry, you are not alone. Most of us climb this ladder the hard way. That's how the lessons stick in our minds.
+
 
 ## Now closing...
 
-... good design starts with understanding of the "what": what you are trying to solve.
+... good design starts with understanding of the **what**: what you are trying to solve.
 
 When you map the business clearly into your application, when you understand how different modules interact, avoid premature abstractions and refactor with
 intent, you get real leverage and benefits. You get better software and faster teams. When teams align around clarity and simplicity, there are fewer surprises,
