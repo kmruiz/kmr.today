@@ -1,15 +1,23 @@
 ---
 layout: default.liquid
-title: Software that changes
+title: Software that changes, designing for maintainability in a world that won't sit still.
 tags: [ software design ]
 ---
 
-Now I am at the airport because my flight has been delayed for two hours. During this week,
-my team is gathering in Copenhagen and we are preparing workshops, talks and discussions as a way to
-do team building and align our expectations and team practices. Guess what, I'll use this dead time
-waiting in Barcelona's Airport  preparing some content that I can reuse later.
+I'm writing this from the airport. My flight's been delayed by two hours.
 
-I suggested discussing about how to ensure that software is maintainable during active development.
+I assumed I'd be in the air by now, heading to my team offsite in Copenhagen. But plans changed, unexpectedly,
+inconveniently and without much warning.
+
+And it made me think, this is exactly what happens in software design.
+
+We build systems based on assumptions, about business rules, dependencies, stability, everything. And then, changes.
+Requirements change, data is wrong, the timeline moves and you need to deliver on time.
+
+So while I wait sitting on the floor at Barcelona's airport, and because I need to prepare some content for the team
+gathering on Copenhagen, I want to share a few thoughts about how to build
+software that changes well. And why most of our assumptions in design time don't hold well.
+
 From my experience I believe this is the core problem:
 
 <div class="fun-fact">
@@ -20,7 +28,7 @@ We usually write code to implement a feature. That's likely not a surprise for y
 this post. This code is basically a way to tell a computational unit what to do to solve a specific
 problem given an input. I'm not saying a machine because we are way past the time where we were writing
 code for a single machine. While there are lots of developers focusing on more user-facing applications,
-there is a huge percentage of software developers that work on cloud environmens, where their applications
+there is a huge percentage of software developers that work on cloud environments, where their applications
 are a mesh that treat a group of machines as a single unit of work.
 
 When we write code, we translate high-level requirements to a consistent and theoretically deterministic language. 
@@ -135,6 +143,35 @@ This is not about obsessing over how code looks like, avoiding duplication or mi
 putting the right responsibilities next to each other, so change is predictable, local and change. Predictability in software design is one of the
 most underrated properties.
 
+Let me give you a concrete example from a past project.
+
+We were building an internal tool to help salespeople generate personalised offers for customers in the energy sector. The logic behind these offers was
+pretty complex and depended on volatile data from several legacy systems: consumption history, pricing, tariffs and more.
+
+Instead of building a mesh of services to pull this data in real time, we took a different approach. We materialised a stable view of the relevant data into
+a local database, updated asynchronously. This gave us a fast, reliable source of truth without being tightly coupled to the volatility of other peer services. Also,
+made our system resilient to downtime from these peer legacy systems.
+
+The core logic of the system was implemented using just two Java classes:
+
+* Offer: encapsulated all the rules and calculations to generate a snapshot of the offer.
+* (IIRC) OfferPrinter: handled the generation of the PDF for the customer.
+
+Everything the salesperson needed was there. It wasn't glamorous, no fancy design patterns, no [Death by Glamour](https://www.youtube.com/watch?v=Q9kDr4na0ls) but it
+was predictable, testable and easy to evolve. When the business changed the rules, we knew exactly where to go.
+
+Not every project starts simple, though. Let me share an example where we overarchitected.
+
+We were building a calendar application in JavaScript. Early on, we decided to apply the MVP pattern everywhere. Every screen had its own Presenter, and we used
+RxJS heavily to model state and bind events reactively. On paper, it was amazing, in practice, it didn't age well.
+
+With new requirements, like notification for invitees or marking events as done, we ended up growing the presenters with unrelated logic and complicated bindings, because
+user interactions _had a lot of side effects_. What started as a really clean abstraction, turned into oversized classes with a lot of responsibilities.
+
+We had presenters reacting to events across boundaries, wiring together streams that had little to do with each other just because we had to react to events. Refactoring became
+complicated because the chain of streams was too tangled, that moving subscriptions around made unrelated functionalities stop working. In that situation, we were trying to design
+something that on the book made sense, but became our enemy.
+
 The best developers I've worked with have a wonderful sense of what belongs together. It's like a spider-sense for architecture, and gets better
 when you improve your understanding of the  business domain.
 
@@ -151,11 +188,19 @@ Forcing decoupling here creates fiction, not clarity.
 
 #### Two modules are at least as coupled as the business requirements they implement.
 
-By accepting this, we can intentionally design better software.
+Accept this and you'll design better systems.
 
-When designing applications, if we are intentional with module boundaries and use coupling on our favour, we can speed up development while
-guaranteeing maintainability. And in addition, we can focus on decoupling what actually makes sense to decouple. Because puttng
-business requirements together in the same module, doesn't mean all business requiremens go together.
+Coupling has a bad reputation. But not all coupling is equal. There is _accidental coupling_: when two parts of the system depend on each other for the wrong
+reasons. But there is also _intentional coupling_, which is based on business rules: it's aligned with reality. It makes behaviour easier to trace.
+
+Abstractions are valuable, and a great tool: they can isolate volatility, reduce repetition, protect invariants... but when used prematurely, they also hide intention. Code that
+is overabstracted is far from the business rules, and understanding the reason it's there becomes guesswork.
+
+The goal is not to avoid decoupling. It's to couple the right things together for the right reason. Only decouple when there are actual tangible benefits of doing it.
+
+When we are intentional with module boundaries and use coupling as a tool, on our favour, we can speed up development while guaranteeing maintainability.
+It also becomes easier to see what should be split, because it will restrain the design and it will feel wrong. Just because two functionalities are in the
+same module, doesn't mean they will be there forever.
 
 Things that don't change together, can be in different modules, even compilation units and deployment units if we want to. Where to put them
 will depend on mutiple factors, like for example:
