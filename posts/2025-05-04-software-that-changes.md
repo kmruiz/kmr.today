@@ -132,10 +132,14 @@ obsolete, or which framework enforces best practices by default. But none of tha
 Designing interactions and boundaries that reflect how the business actually works. When 
 
 What is important is domain boundaries and interactions. When I was working as a MongoDB Consulting Engineer, 
-one of the core principles I used to share was: _Data that is read together is stored together_. This is kind of 
-the motto of the document model, and also _of good software design_ (but with a small tweak).
+one of the core principles I used to share was: _Data that is read together is stored together_. That's the heart
+of the document model, and with a small tweak, it's also the heart of good software design.
 
-The essential motto that describes maintainable and efficient software is:
+The same principle shows up in Data Oriented Design, a paradigm often used in performance-critical systems: _Data that's
+used together should be laid out together in memory._. It's a different context, different goals, but the idea is the same:
+co-location improves efficiency, whether it's CPU, data access, or change.
+
+The essential motto that describes maintainable and evolvable software is:
 
 #### Code that changes together stays together
 
@@ -257,12 +261,28 @@ The concept that puts everything in motion is the capacity of change. Premature 
 
 Wait and observe.
 
+Not all parts of a system change equally. Some areas are in constant motion, others stabilise and stop demanding attention.
+
+In Domain Driven Design, this is the difference between core domains (where the competitive advantage lives and where you focus) and supporting domains. In Wardley Mapping,
+it's the journey from genesis to commodity.
+
+These models show us a key concept: change is uneven. Some parts of the system will fail apart first. They will be volatile and have unclear boundaries and suffer from
+last minute changes.
+
+One way to think about it: software design is like juggling. Not all the balls have the same weight or value. The parts of your system that evolve fast, change often, or
+carry the actual business value are the ones that you don't want to let fall onto the floor. They are the ones that deserve more care, more intentional boundaries and more
+flexibility.
+
 ## Now closing...
 
 ... good design starts with understanding of the "what": what you are trying to solve.
 
 When you map the business clearly into your application, when you understand how different modules interact, avoid premature abstractions and refactor with
-intent, you get real leverage and benefits. You get better software and faster teams.
+intent, you get real leverage and benefits. You get better software and faster teams. When teams align around clarity and simplicity, there are fewer surprises,
+faster feedback and less fear of change.
 
-When multiple developers are align around that clarity, the productivity boost is exponential. It requires strong leadership and a thoughtful process to implement
-changes in the codebase, but it pays off.
+It's not glamorous. There are no silver bullets, no architectural theatre. But it works.
+
+<div class="fun-fact">
+Overdesigned software doesn't fail by accident. It dies by glamour.
+</div>
