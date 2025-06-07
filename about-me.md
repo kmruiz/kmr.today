@@ -3,7 +3,7 @@ layout: default.liquid
 title: About Me
 ---
 
-Senior Software Engineer at _MongoDB_, where I work on developer-facing tools and systems that support adaptability, clarity, and flow. My current work includes Compass, mongosh, the official MongoDB plugins for VSCode and IntelliJ, and the official MCP Server. I focus on developer experience, language design, and organic architectures. My thinking is shaped as much by production constraints as by experimentation, and I care about the long-term ergonomics of code, teams, and the business. I see myself as a systems-thinker who can jump across abstraction levels, from how something is implemented to how it affects an organisation and the business.
+Senior Software Engineer at _MongoDB_, where I work on developer-facing tools and system. My current work includes Compass, mongosh, the official MongoDB plugins for VSCode and IntelliJ, and the official MCP Server. I focus on developer experience, language design, and organic architectures. My thinking is shaped as much by production constraints as by experimentation, and I care about the long-term ergonomics of code, teams, and the business. I see myself as a systems-thinker who can jump across abstraction levels, from how something is implemented to how it affects an organisation and the business.
 
 Across more than a decade of experience, I’ve worked at the intersection of system design, tooling, and developer experience. I’ve led engineering teams, including organizations of 20+ people, and have worked in Staff Engineer roles where architecture, execution, and cross-team alignment were part of the day-to-day. I’m especially interested in how boundaries between systems, responsibilities, and mental models can be made explicit and safe to evolve.
 
