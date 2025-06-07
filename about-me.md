@@ -38,7 +38,7 @@ I’m not currently looking for a new role, but I care deeply about the kinds of
 
 In the future, I’m interested in roles like Staff Engineer or Director of Engineering, where I can extend my current focus to include broader system direction, team topology, and long-term technical strategy. I’m also exploring how AI (particularly probabilistic models) can support system design conversations, architecture under uncertainty, and evolving requirements.
 
-I'm based in Catalonia and prefer to work remotely, async-first, and with high trust. I regularly overlap with timezones from UTC−1 to UTC+4, and I’ve successfully worked with distributed teams spanning Europe, the Americas, and Asia. I’m not open to relocation.
+I'm based in Catalonia and prefer to work remotely, async-first, and with high trust. I speak English (professional level), Catalan, and Spanish (both native). I regularly overlap with timezones from UTC−1 to UTC+4, and I’ve successfully worked with distributed teams across Europe, the Americas, and Asia. I’m not open to relocation.
 
 ## Mentoring & Talks
 
