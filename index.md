@@ -13,7 +13,7 @@ pagination:
 <ul id="index">
   {% for post in paginator.pages %}
   <li>
-    <a data-ctrl="{{forloop.index0}}" href="{{ post.permalink }}"><span>^{{forloop.index0}}</span> {{post.published_date | date: "%Y-%m-%d" }} {{post.title}}</a>
+    <a data-ctrl="{{forloop.index0}}" href="/{{ post.permalink }}"><span>^{{forloop.index0}}</span> {{post.published_date | date: "%Y-%m-%d" }} {{post.title}}</a>
   </li>
   {% endfor %}
 </ul>
