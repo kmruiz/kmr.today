@@ -3,7 +3,7 @@ layout: default.liquid
 title: About Me
 ---
 
-DevTools Software Engineer at _MongoDB_, previously at _ThoughtWorks_. I build systems that help software stay adaptable over time and across teams. I focus on developer tools, language design, and organic architectures. My thinking is shaped as much by production constraints as by experimentation, and I care about the long-term ergonomics of code, teams and the business. I see myself as a systems-thinker that can jump across abstraction levels, from how something is implemented to how it affects an organisation and the business.
+Senior Software Engineer at _MongoDB_, where I work on developer-facing tools and systems that support adaptability, clarity, and flow. My current work includes Compass, mongosh, the official MongoDB plugins for VSCode and IntelliJ, and the official MCP Server. I focus on developer experience, language design, and organic architectures. My thinking is shaped as much by production constraints as by experimentation, and I care about the long-term ergonomics of code, teams, and the business. I see myself as a systems-thinker who can jump across abstraction levels, from how something is implemented to how it affects an organisation and the business.
 
 Across more than a decade of experience, I’ve worked at the intersection of system design, tooling, and developer experience. I’ve led engineering teams, including organizations of 20+ people, and have worked in Staff Engineer roles where architecture, execution, and cross-team alignment were part of the day-to-day. I’m especially interested in how boundaries between systems, responsibilities, and mental models can be made explicit and safe to evolve.
 
@@ -32,17 +32,21 @@ Outside of production work, I’ve explored these ideas further through personal
 ## Delivery Forecasting Tooling
 - [**jira-montecarlo**](https://github.com/kmruiz/jira-montecarlo): a CLI tool for probabilistic delivery forecasting. It uses Monte Carlo simulations and throughput data to replace point estimation with statistical modeling.
 
-## What I’m Looking For (Eventually)
+## What I'm Looking For
 
 I’m not currently looking for a new role, but I care deeply about the kinds of problems I want to work on next.
 
-In the future, I’m interested in roles like Staff Engineer or Director of Engineering, where I can extend my current focus to include broader system direction, team topology, and long-term technical strategy. I’m also exploring how AI—particularly probabilistic models—can support system design conversations, architecture under uncertainty, and evolving requirements.
+In the future, I’m interested in roles like Staff Engineer or Director of Engineering, where I can extend my current focus to include broader system direction, team topology, and long-term technical strategy. I’m also exploring how AI (particularly probabilistic models) can support system design conversations, architecture under uncertainty, and evolving requirements.
+
+I'm based in Catalonia and prefer to work remotely, async-first, and with high trust. I regularly overlap with timezones from UTC−1 to UTC+4, and I’ve successfully worked with distributed teams spanning Europe, the Americas, and Asia. I’m not open to relocation.
 
 ## Mentoring & Talks
 
-I occasionally mentor engineers: especially around system design, architecture, and career transitions. I’ve also given internal tech talks and architecture reviews, and I’m open to doing more public speaking or guest sessions if the topic aligns.
+I occasionally mentor engineers: especially around system design, architecture and growth. I’ve also delivered internal architecture reviews, run workshops, and spoken at various conferences in Barcelona on topics like domain modeling, developer experience, and adaptive systems.
 
-Topics I care about include software boundaries, change-resilient architecture, developer tooling, and AI-assisted software design. If you're working on something interesting and want to exchange ideas, feel free to reach out at _me&lt;AT&gt;kmr&lt;DOT&gt;today_. 
+I’m open to more public speaking, guest sessions, or collaborative workshops: especially when the topics align with how organisations build software that changes.
+
+Topics I care about include software boundaries, change-resilient architecture, developer tooling, and AI-assisted software design.
 
 ## What I Write About
 
@@ -54,6 +58,14 @@ This page is my notebook. I write about the topics I care about, the systems I e
 * the trade-offs behind the systems we build
 
 Lately, I’ve been especially focused on how language-level abstractions shape runtime and organizational boundaries and how we can design for change instead of resistance.
+
+## Selected Posts
+
+Here are a few posts that reflect how I think and work:
+
+* [Software that changes, designing for maintainability in a world that won't sit still](/posts/2025-05-04-software-that-changes.html)
+* [Software delivery is about forecasting, not foreseeing](/posts/2025-03-31-forecasting.html)
+* [Four Key Metrics and team performance](/posts/2020-04-05-4km-and-team-performance.html)
 
 📬 You can reach me at _me&lt;AT&gt;kmr&lt;DOT&gt;today_.  
 🚫 Not open to vendor outreach or commercial prospecting.
