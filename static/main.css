@@ -1,11 +1,13 @@
 html {
     --color-gray-0: hsl(150, 0%, 11%);
     --color-gray-9: hsl(150, 0%, 80%);
+    --color-white: hsl(150, 0%, 95%);
 
     --color-green: hsl(129, 25%, 58%);
     --color-blue:  hsl(250, 45%, 80%);
     --color-pink:  hsl(290, 45%, 66%);
     --color-cyan: cyan;
+    --color-blue: hsl(200, 45%, 55%);
     --color-orange: hsl(30, 56%, 50%);
     
     --font-primary: 'monospace';
@@ -55,6 +57,7 @@ main {
     height: 80vh;
     max-height: 80vh;
     overflow-y: auto;
+    overflow-x: hidden;
     text-align: justify;
 }
 
@@ -125,6 +128,7 @@ pre[style] {
     margin-left: 4ch;
     font-family: var(--font-code);
     font-size: var(--font-size-m);
+    overflow-x: auto;
 }
 
 table {
@@ -174,6 +178,10 @@ img {
     width: 100%;
 }
 
+img.light-bg {
+    background-color: var(--color-white);
+}
+
 div#pagination {
     width: 100%;
     margin-top: 2ch;
@@ -184,4 +192,8 @@ div.fun-fact {
     margin: 0 10em;
     border: 1px dashed var(--color-gray-9);
     padding: 1em;
+}
+
+a {
+    color: var(--color-blue);
 }
