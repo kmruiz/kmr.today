@@ -63,7 +63,7 @@ Lately, I’ve been especially focused on how language-level abstractions shape 
 
 Here are a few posts that reflect how I think and work:
 
-* [Software that changes, designing for maintainability in a world that won't sit still](/posts/2025-05-04-software-that-changes.html)
+* [Software that changes, designing for maintainability](/posts/2025-05-04-software-that-changes.html)
 * [Software delivery is about forecasting, not foreseeing](/posts/2025-03-31-forecasting.html)
 * [Four Key Metrics and team performance](/posts/2020-04-05-4km-and-team-performance.html)
 
