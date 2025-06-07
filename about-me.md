@@ -18,18 +18,18 @@ Over the years, I've worked on systems across domains such as:
 
 Outside of production work, I’ve explored these ideas further through personal tools and language/runtime experiments:
 
-## Project Modeling Systems
+### Project Modeling Systems
 - [**pottery**](https://github.com/kmruiz/pottery): a simplified, convention-driven project model written in Java. It offers a YAML-based, predictable alternative to Maven, with an emphasis on clarity and developer experience.
 - [**clpom**](https://github.com/kmruiz/clpom): a minimal project model for Common Lisp. Designed as a simpler alternative to ASDF, focused on reducing boilerplate and improving toolability.
 
-## Language and Runtime Design
+### Language and Runtime Design
 - [**Sonata**](https://github.com/kmruiz/sonata): an experimental language built around runtime dispatch, contract-driven APIs, and domain-oriented composition. A work in progress aimed at exploring business-aligned language features.
 - [**cl-sonkv**](https://github.com/kmruiz/cl-sonkv): a small key-value store written in Common Lisp. Built for simplicity and transparency, it explores basic durability and data layout without external dependencies.
 
-## UI Architecture Experimentation
+### UI Architecture Experimentation
 - [**morphonent**](https://github.com/kmruiz/morphonent): a functional UI library that models transitions and state via pure functions. Designed to prioritize testability, moldability, and composable UI interactions.
 
-## Delivery Forecasting Tooling
+### Delivery Forecasting Tooling
 - [**jira-montecarlo**](https://github.com/kmruiz/jira-montecarlo): a CLI tool for probabilistic delivery forecasting. It uses Monte Carlo simulations and throughput data to replace point estimation with statistical modeling.
 
 ## What I'm Looking For
